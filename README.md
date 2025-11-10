@@ -1,128 +1,54 @@
-# Quick Note
+# worst REST API example
 
-I found this quick example [ynsrc/python-simple-rest-api](https://github.com/ynsrc/python-simple-rest-api) of a simple Python API while looking for quick reference to cobble together a quick API for simple a RPI project I am working on (didn't need or want the overhead of FastAPI or equivalent for this simple home project - litterally to set off an animal trap I wanted and API endpoint). I though your little example was spot on for my purposes but there was one thing that I felt could be handled a little bit different and I feel like makes it a little easier extendable and I thought it would be a bit cleaner to remove the ApiRequestHandler definition from inside __main__ and especially with the global api reference.
+Minimal REST API example
 
-Basically, all I did was add a method call to the API class that get passed to the HTTPServer instead of the ApiRequestHandler. Internally to the HTTPServer it will "init" the RequestHandlerClass but in this case will just call the API instance. The callable method will then instantiate the ApiRequestHandler passing a reference to the API instance to the ApiRequestHandler without the need for the global in the ApiRequestHandler.
+## Description
 
-In the ApiRequestHandler all I had to do was initialize the super class passing the same arguments needed for the BaseHTTPRequestHandler while allowing it to pass the api object. Then the API callable returns that ApiRequestHandler object that carries with reference to itself.
+This is Project is build on: https://github.com/ynsrc/python-simple-rest-api/tree/main
+All Credits go to that Project.
 
+This Project only adds a "http delete" to the existing post and get. The data is not persisted in this main.py.
+Also changes the approach to have multiple object endpoints by changing the method instead of the path.
 
-# Simple REST API with pure Python
+### Dependencies
 
-This is an example REST API project.
+* import json
+* from http.server import HTTPServer, BaseHTTPRequestHandler
+* from urllib.parse import urlparse, parse_qs
 
-## Run
+### Installing
+
+* Downloading/Copying the script
+
+### Executing program
+
+just run the command "python ./main.py"
+
 ```
-# python server.py
+python ./main.py
 ```
+To use the API just take the examples from the ./curls.sh.
 
-Default port is 5000, you can change it in `server.py`.
+You can edit the endpoint by adjusting the term "data" to your needs:
+* in the api_data dict
+* endpoints:  @api.get("/data") , @api.post("/data") etc.
+* and editing the access of the dict object: api_data["data"]
 
-## Index
-```
-$ curl "http://127.0.0.1:5000/"
-{
-    "name": "Python REST API Example",
-    "summary": "This is simple REST API architecture with pure Python",
-    "actions": [
-        "add",
-        "delete",
-        "list",
-        "search"
-    ],
-    "version": "1.0.0"
-}
-```
+## Authors
 
-## List Items
-```
-$ curl "http://127.0.0.1:5000/list"
-{
-    "count": 3,
-    "items": [
-        {
-            "id": 1000,
-            "name": "cat",
-            "description": "cat is meowing"
-        },
-        {
-            "id": 1001,
-            "name": "dog",
-            "description": "dog is barking"
-        },
-        {
-            "id": 1002,
-            "name": "bird",
-            "description": "bird is singing"
-        }
-    ]
-}
-```
+Contributors names and contact info
 
-## Search
-```
-$ curl "http://127.0.0.1:5000/search?q=d"
-{
-    "count": 2,
-    "items": [
-        {
-            "id": 1001,
-            "name": "dog",
-            "description": "dog is barking"
-        },
-        {
-            "id": 1002,
-            "name": "bird",
-            "description": "bird is singing"
-        }
-    ]
-}
-```
+ex. Gerd Grimmen (F.KU)
 
-## Delete Item
-```
-$ curl "http://127.0.0.1:5000/delete" -H "Content-Type: application/json" -d '{"id": 1001}'
-{
-    "deleted": 1001
-}
-```
+## Version History
 
-## Add Item
-```
-$ curl "http://127.0.0.1:5000/add" -H "Content-Type: application/json" \
-> -d '{"name": "fish", "description": "fish is swimming"}'
-{
-    "id": 1005,
-    "name": "fish",
-    "description": "fish is swimming"
-}
-```
+* 0.1
+    * Nothing here to see
 
-## List Again
-```
-$ curl "http://127.0.0.1:5000/list"
-{
-    "count": 3,
-    "items": [
-        {
-            "id": 1000,
-            "name": "cat",
-            "description": "cat is meowing"
-        },
-        {
-            "id": 1002,
-            "name": "bird",
-            "description": "bird is singing"
-        },
-        {
-            "id": 1003,
-            "name": "fish",
-            "description": "fish is swimming"
-        }
-    ]
-}
-```
+## License
 
-
-# License
 The Unlicense. Feel free to use or change it how you need.
+
+## Acknowledgments
+
+* https://github.com/ynsrc/python-simple-rest-api/tree/main
