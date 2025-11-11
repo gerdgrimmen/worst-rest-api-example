@@ -42,6 +42,9 @@ ex. Gerd Grimmen (F.KU)
 
 ## Version History
 
+* 0.2
+    * Added PUT Method (Takes in binary data, for now planned for images)
+    * can also give a respone with a returned string intead of a dict. Now it can handle requests for static sites or text elements  
 * 0.1
     * Nothing here to see
 
