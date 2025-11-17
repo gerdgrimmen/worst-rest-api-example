@@ -95,6 +95,8 @@ if __name__ == "__main__":
                         self.wfile.write(json.dumps(result, indent=4).encode())
                     elif type(result) is str:
                         self.wfile.write(result.encode())
+                    elif type(result) is bytes:
+                        self.wfile.write(result.encode())
                 except Exception as e:
                     self.send_response(500, "Server Error")
                     self.end_headers()
