@@ -41,7 +41,9 @@ Contributors names and contact info
 ex. Gerd Grimmen (F.KU)
 
 ## Version History
-
+* 0.2.2
+    * change License due to lack of acknowledgement for "Unlicense" in Germany
+    * License from this version on is CC0 1.0
 * 0.2.1
     * fix image output as result - don't know, why I deleted that part before committing
 * 0.2
@@ -52,7 +54,8 @@ ex. Gerd Grimmen (F.KU)
 
 ## License
 
-The Unlicense. Feel free to use or change it how you need.
+This work is marked CC0 1.0. To view a copy of this mark, visit https://creativecommons.org/publicdomain/zero/1.0/
+
 
 ## Acknowledgments
 
