@@ -55,6 +55,15 @@ def get_data(args):
             return {"message": "not found"}
     return {"data": api_data["data"]}
 
+@api.get("/data/<id>")
+def get_signle_data(args, id):
+    if "path_id" in args.keys():
+        if args["path_id"] in api_data["data"].keys():
+            return api_data["data"][args["path_id"]]
+        else:
+            return {"message": "not found"}
+    return {"data": api_data["data"]}
+
 @api.post("/data")
 def post_data(body):
     if not "text" in body.keys():
