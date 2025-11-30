@@ -38,8 +38,8 @@ def index(_):
     return { 
         "name": "Minimal Rest API example",
         "summary": "",
-        "endpoints": [ "/data", "imagedata", "/help" ],
-        "version": "0.2.0"
+        "endpoints": [ "/data", "/imagedata", "/help" ],
+        "version": "0.3.0"
     }
 
 @api.get("/help")

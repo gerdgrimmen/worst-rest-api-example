@@ -41,6 +41,10 @@ Contributors names and contact info
 ex. Gerd Grimmen (F.KU)
 
 ## Version History
+* 0.3.0
+    * change POST, GET processing
+    * add 40x return code responsemethods
+    * add single dataset endpoint with "/<id>" syntacs
 * 0.2.2
     * change License due to lack of acknowledgement for "Unlicense" in Germany
     * License from this version on is CC0 1.0
