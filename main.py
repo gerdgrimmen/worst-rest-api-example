@@ -106,6 +106,21 @@ if __name__ == "__main__":
                 self.end_headers()
                 self.wfile.write(json.dumps({"error": "not found"}, indent=4).encode())
 
+        def return_404(self):
+            self.send_response(404, "Not Found")
+            self.end_headers()
+            self.wfile.write(json.dumps({"error": "not found"}, indent=4).encode())
+        
+        def return_401(self):
+            self.send_response(401, "Not Authorized")
+            self.end_headers()
+            self.wfile.write(json.dumps({"error": "not found"}, indent=4).encode())
+        
+        def return_400(self):
+            self.send_response(400)
+            self.end_headers()
+            self.wfile.write(json.dumps({"error": "posted data must be in json format"}, indent=4).encode())
+
         def do_GET(self):
             parsed_url = urlparse(self.path)
             path = parsed_url.path
