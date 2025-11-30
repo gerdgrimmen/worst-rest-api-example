@@ -125,16 +125,17 @@ if __name__ == "__main__":
             parsed_url = urlparse(self.path)
             path = parsed_url.path
             args = parse_qs(parsed_url.query)
-            if not path in api.routing["GET"]:
+            if path in api.routing["GET"]: 
+                self.call_api("GET", path, args)
+                return
+            else:
                 new_path, path_id = path.rsplit("/",1)
-                if new_path == "": new_path = "/"
-                if new_path in api.routing["GET"]: 
-                    path = new_path
-                    args["path_id"] = path_id
-            for k in args.keys():
-                if len(args[k]) == 1:
-                    args[k] = args[k][0]
-            self.call_api("GET", path, args)
+                if new_path+"/<id>" in api.routing["GET"]:
+                    args["/<id>"] = path_id
+                    self.call_api("GET", new_path+"/<id>", args, path_id)
+                    return
+            self.return_404()
+
 
         def do_POST(self):
             parsed_url = urlparse(self.path)
