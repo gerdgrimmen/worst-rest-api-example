@@ -94,10 +94,10 @@ if __name__ == "__main__":
     class ApiRequestHandler(BaseHTTPRequestHandler):
         global api
         
-        def call_api(self, method, path, args):
+        def call_api(self, method, path, args, in_id=None):
             if path in api.routing[method]:
                 try:
-                    result = api.routing[method][path](args)
+                    result = api.routing[method][path](args) if in_id == None else api.routing[method][path](args, in_id)
                     self.send_response(200)
                     self.end_headers()
                     if type(result) is dict:
