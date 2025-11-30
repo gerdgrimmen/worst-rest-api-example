@@ -141,15 +141,15 @@ if __name__ == "__main__":
             parsed_url = urlparse(self.path)
             path = parsed_url.path
             if self.headers.get("content-type") != "application/json":
-                self.send_response(400)
-                self.end_headers()
-                self.wfile.write(json.dumps({
-                    "error": "posted data must be in json format"
-                }, indent=4).encode())
+                self.return_400()
+                return
             else:
                 data_len = int(self.headers.get("content-length"))
                 data = self.rfile.read(data_len).decode()
-                self.call_api("POST", path, json.loads(data))
+                if path in api.routing["POST"]:
+                    self.call_api("POST", path, json.loads(data))
+                    return
+            self.return_404()
 
         def do_PUT(self):
             parsed_url = urlparse(self.path)
